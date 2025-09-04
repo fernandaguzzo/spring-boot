@@ -2,8 +2,6 @@ package com.example.aweb.model;
 
 import java.time.LocalDate;
 
-import org.hibernate.validator.constraints.br.CPF;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,26 +13,25 @@ import jakarta.validation.constraints.Past;
 
 @Entity
 public class Student {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotBlank(message = "O nome não pode estar em branco!")
+
     @Email(message = "E-mail inválido")
     @NotBlank(message = "É necessário o fornecimento de um e-mail")
     private String email;
-    @CPF(message = "CPF inválido")
+
     @NotBlank(message = "O campo precisa ser preenchido!")
     private String cpf;
+
     @NotNull(message = "O campo é obrigatório!")
     @Past(message = "Data de nascimento inválida!")
     private LocalDate dataNascimento;
 
-    public Student(){}
+    public Student() {}
 
-    public Student(Long id,
-            @NotBlank(message = "O nome não pode estar em branco!") @Email(message = "E-mail inválido") @NotBlank(message = "É necessário o fornecimento de um e-mail") String email,
-            @CPF(message = "CPF inválido") @NotBlank(message = "O campo precisa ser preenchido!") String cpf,
-            @NotNull(message = "O campo é obrigatório!") @Past(message = "Data de nascimento inválida!") LocalDate dataNascimento) {
+    public Student(Long id, String email, String cpf, LocalDate dataNascimento) {
         this.id = id;
         this.email = email;
         this.cpf = cpf;
@@ -72,6 +69,4 @@ public class Student {
     public void setDataNascimento(LocalDate dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
-
-    
 }
